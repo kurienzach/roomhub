@@ -2,7 +2,7 @@
 
 WiFiManager wifiManager;
 
-void setupWifi() {
+boolean setupWifi() {
     wifiManager.setConfigPortalTimeout(180);
-    wifiManager.autoConnect("RoomHub-9318rj");
+    return wifiManager.autoConnect("RoomHub-9318rj");
 }
