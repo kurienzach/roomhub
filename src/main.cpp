@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include "ota.h"
 #include "wifi_setup.h"
+#include "mqtt.h"
 #include "ir.h"
 
 void setup() {
@@ -14,8 +15,9 @@ void setup() {
     delay(1000);
   }
 
-  // Setup OTA
   setupOTA();
+
+  setupMQTT();
 
   setupIR();
 
@@ -25,4 +27,5 @@ void setup() {
 }
 void loop() {
   ArduinoOTA.handle();
+  mqttLoopHandler();
 }
