@@ -6,6 +6,6 @@
 
 void setupIR();
 
-void sendIR(const uint16_t buf[]);
+void sendIR(const uint16_t buf[], int len);
 
 #endif

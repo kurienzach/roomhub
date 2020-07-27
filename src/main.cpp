@@ -3,12 +3,13 @@
 #include "wifi_setup.h"
 #include "mqtt.h"
 #include "ir.h"
+#include "motion.h"
+#include "dht.h"
 
-#define LED_PIN 15
+#define LED_PIN 4
 
 void blinkLED() {
-  Serial.println("Toggle LED");
-  digitalWrite(LED_PIN, !(digitalRead(LED_PIN)));
+  sendMqttMsg("roomhub-1/status", "DONE");
 }
 
 Ticker blinker;
@@ -31,13 +32,14 @@ void setup() {
   setupOTA();
   setupMQTT();
   setupIR();
+  setupMotion(1);
+  setupDHT(2, 5);
 
   Serial.println("Ready");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  pinMode(LED_PIN, OUTPUT);
-  blinker.attach(1, blinkLED);
+  blinker.attach(120, blinkLED);
 }
 
 void loop() {
